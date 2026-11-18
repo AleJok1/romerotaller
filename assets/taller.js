@@ -83,10 +83,20 @@
     // Tabla
     const tabla = $('#horario');
     if (tabla) {
-      tabla.replaceChildren(...gs.map(g => {
+      const filas = [];
+      for (const g of gs) {
+        if (g.txt === 'Cerrado' && g.dias.includes(0)) {
+          const otros = g.dias.filter(d => d !== 0);
+          if (otros.length) filas.push({ txt: g.txt, dias: otros, festivos: false });
+          filas.push({ txt: 'Cerrado', dias: [0], festivos: true });
+        } else filas.push({ txt: g.txt, dias: g.dias, festivos: false });
+      }
+      tabla.replaceChildren(...filas.map(g => {
         const fila = document.createElement('div');
-        if (g.dias.includes(hoy.wd) && !hoy.festivo) fila.className = 'hoy';
-        const dt = document.createElement('dt'); dt.textContent = nombreGrupo(g.dias, false);
+        const esHoy = g.festivos ? (hoy.wd === 0 || !!hoy.festivo) : (g.dias.includes(hoy.wd) && !hoy.festivo);
+        if (esHoy) fila.className = 'hoy';
+        const dt = document.createElement('dt');
+        dt.textContent = g.festivos ? 'Domingos y festivos' : nombreGrupo(g.dias, false);
         const dd = document.createElement('dd'); dd.textContent = g.txt;
         fila.append(dt, dd); return fila;
       }));
@@ -103,17 +113,7 @@
       av.hidden = false;
       av.textContent = `Del ${d1} de ${MESES[m1 - 1]} al ${d2} de ${MESES[m2 - 1]}: ` + grupos(v.horario).filter(g => g.txt !== 'Cerrado').map(g => `${nombreGrupo(g.dias, false).toLowerCase()} ${g.txt}`).join(', ') + '.';
     }
-    // Próximos festivos que caen en día de apertura
-    const lista = $('#proximos-festivos');
-    if (lista) {
-      const prox = [];
-      for (let i = 0; i < 120 && prox.length < 3; i++) {
-        const s = dia(a.y, a.m, a.d, i);
-        const normal = ((s.enVerano ? C.verano.horario : C.horario)[s.wd] || []).length;
-        if (s.festivo && normal) prox.push(`${DIAS[s.wd]} ${s.D} de ${MESES[s.M - 1]} (${s.festivo.replace(/\s*\(.*\)$/, '')})`);
-      }
-      if (prox.length) { lista.hidden = false; $('span', lista).textContent = prox.join(', ') + '.'; }
-    }
+    // Los festivos no se listan: siguen en config.js y cierran el estado de arriba.
     // Estado
     const e = estadoAhora();
     $$('[data-estado]').forEach(el => { el.dataset.abierto = e.abierto ? 'si' : 'no'; el.textContent = e.texto; });

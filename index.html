@@ -93,20 +93,22 @@
 <main id="contenido" tabindex="-1">
 
 <section class="portada" id="inicio" aria-labelledby="titular">
-  <div class="portada-media" aria-hidden="true">
-    <picture>
-      <source type="image/webp" srcset="assets/fachada-llaves-720.webp 720w, assets/fachada-llaves.webp 1200w" sizes="(max-width:699px) 220vw, 100vw">
-      <img src="assets/fachada-llaves.jpg" srcset="assets/fachada-llaves-720.jpg 720w, assets/fachada-llaves.jpg 1200w" sizes="(max-width:699px) 220vw, 100vw" width="1200" height="900" fetchpriority="high" decoding="async" alt="">
-    </picture>
-  </div>
   <div class="envoltura portada-contenido">
-    <p class="ceja"><span class="estado" data-estado data-abierto="">Horario en la sección de contacto</span></p>
-    <h1 id="titular">Taller mecánico <span>en Roquetas de Mar</span></h1>
-    <p class="entrada">Somos Miguel y Silvia. Cuéntanos qué le pasa al coche y te decimos cuándo podemos verlo.</p>
-    <div class="acciones">
-      <a class="boton wa" href="https://wa.me/34668589283?text=Hola%2C%20Taller%20Romero.%20Quer%C3%ADa%20pedir%20cita."><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir cita por WhatsApp</a>
-      <a class="boton boton-cristal cifras" href="tel:+34950885158"><svg aria-hidden="true"><use href="#i-tel"/></svg>950 885 158</a>
+    <div class="portada-texto">
+      <p class="ceja"><span class="estado" data-estado data-abierto="">Horario en la sección de contacto</span></p>
+      <h1 id="titular">Taller mecánico <span>en Roquetas de Mar</span></h1>
+      <p class="entrada">Somos Miguel y Silvia. Cuéntanos qué le pasa al coche y te decimos cuándo podemos verlo.</p>
+      <div class="acciones">
+        <a class="boton wa" href="https://wa.me/34668589283?text=Hola%2C%20Taller%20Romero.%20Quer%C3%ADa%20pedir%20cita."><svg aria-hidden="true"><use href="#i-wa"/></svg>Pedir cita por WhatsApp</a>
+        <a class="boton boton-cristal cifras" href="tel:+34950885158"><svg aria-hidden="true"><use href="#i-tel"/></svg>950 885 158</a>
+      </div>
     </div>
+    <figure class="portada-foto">
+      <picture>
+        <source type="image/webp" srcset="assets/fachada-llaves-720.webp 720w, assets/fachada-llaves.webp 1200w" sizes="(min-width:1000px) 520px, (min-width:700px) calc(100vw - 48px), calc(100vw - 40px)">
+        <img src="assets/fachada-llaves.jpg" srcset="assets/fachada-llaves-720.jpg 720w, assets/fachada-llaves.jpg 1200w" sizes="(min-width:1000px) 520px, (min-width:700px) calc(100vw - 48px), calc(100vw - 40px)" width="1200" height="900" fetchpriority="high" decoding="async" alt="Fachada de Taller Romero en Roquetas de Mar">
+      </picture>
+    </figure>
     <ul class="datos-hoy cifras">
       <li><svg aria-hidden="true"><use href="#i-reloj"/></svg><span><b>Horario</b><span data-horario-resumen>Llama al 950 885 158</span></span></li>
       <li><svg aria-hidden="true"><use href="#i-pin"/></svg><span><b>Calle Luarca, 17</b><a class="como-llegar" href="https://www.google.com/maps/dir/?api=1&amp;destination=TALLER+ROMERO+S.L&amp;destination_place_id=ChIJrWbAO3pxcA0RxRs7Sl1MRZg">Cómo llegar</a></span></li>
@@ -121,15 +123,15 @@
     <div class="intro">
       <p class="ceja">Servicios</p>
       <h2 id="t-servicios">Lo que hacemos <span>en el taller</span></h2>
-      <p>Toca el que te interese y te dejamos el mensaje de WhatsApp preparado. Si no ves lo que buscas, pregunta igualmente.</p>
+      <p>Toca un servicio y te preparamos la consulta. Si no ves lo que buscas, pregunta igualmente.</p>
     </div>
     <ul class="servicios">
-      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-llave"/></svg></span><div class="servicio-texto"><h3>Mecánica rápida</h3><p>Mantenimiento y reparaciones del día a día. Dinos qué coche es y qué le notas.</p></div><a href="#cita" data-servicio="Mecánica rápida">Preguntar por WhatsApp<svg aria-hidden="true"><use href="#i-flecha"/></svg></a></li>
-      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-rueda"/></svg></span><div class="servicio-texto"><h3>Neumáticos</h3><p>Si nos pasas la medida, que viene en el lateral de la rueda, te contestamos antes.</p></div><a href="#cita" data-servicio="Neumáticos">Preguntar por WhatsApp<svg aria-hidden="true"><use href="#i-flecha"/></svg></a></li>
-      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-diagnosis"/></svg></span><div class="servicio-texto"><h3>Diagnosis</h3><p>¿Se ha encendido un testigo? Dinos cuál y qué notas al conducir, y lo miramos con la máquina.</p></div><a href="#cita" data-servicio="Diagnosis">Preguntar por WhatsApp<svg aria-hidden="true"><use href="#i-flecha"/></svg></a></li>
-      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-itv"/></svg></span><div class="servicio-texto"><h3>Pre-ITV</h3><p>Lo revisamos antes de la inspección para que no te lleves sustos. Dinos la fecha de tu ITV.</p></div><a href="#cita" data-servicio="Pre-ITV">Preguntar por WhatsApp<svg aria-hidden="true"><use href="#i-flecha"/></svg></a></li>
-      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-remolque"/></svg></span><div class="servicio-texto"><h3>Bolas de remolque</h3><p>Montamos enganche para remolque. Con marca, modelo y año te decimos qué opciones hay.</p></div><a href="#cita" data-servicio="Bolas de remolque">Preguntar por WhatsApp<svg aria-hidden="true"><use href="#i-flecha"/></svg></a></li>
-      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-aire"/></svg></span><div class="servicio-texto"><h3>Aire acondicionado</h3><p>Si ya no enfría como antes, cuéntanos qué hace. En Almería es mejor no esperar al verano.</p></div><a href="#cita" data-servicio="Aire acondicionado">Preguntar por WhatsApp<svg aria-hidden="true"><use href="#i-flecha"/></svg></a></li>
+      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-llave"/></svg></span><div class="servicio-texto"><h3><a href="#cita" data-servicio="Mecánica rápida">Mecánica rápida<span class="sr">: preguntar</span></a></h3><p>Mantenimiento y reparaciones del día a día. Dinos qué coche es y qué le notas.</p></div><svg class="servicio-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></li>
+      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-rueda"/></svg></span><div class="servicio-texto"><h3><a href="#cita" data-servicio="Neumáticos">Neumáticos<span class="sr">: preguntar</span></a></h3><p>Si nos pasas la medida, que viene en el lateral de la rueda, te contestamos antes.</p></div><svg class="servicio-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></li>
+      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-diagnosis"/></svg></span><div class="servicio-texto"><h3><a href="#cita" data-servicio="Diagnosis">Diagnosis<span class="sr">: preguntar</span></a></h3><p>¿Se ha encendido un testigo? Dinos cuál y qué notas al conducir, y lo miramos con la máquina.</p></div><svg class="servicio-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></li>
+      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-itv"/></svg></span><div class="servicio-texto"><h3><a href="#cita" data-servicio="Pre-ITV">Pre-ITV<span class="sr">: preguntar</span></a></h3><p>Lo revisamos antes de la inspección para que no te lleves sustos. Dinos la fecha de tu ITV.</p></div><svg class="servicio-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></li>
+      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-remolque"/></svg></span><div class="servicio-texto"><h3><a href="#cita" data-servicio="Bolas de remolque">Bolas de remolque<span class="sr">: preguntar</span></a></h3><p>Montamos enganche para remolque. Con marca, modelo y año te decimos qué opciones hay.</p></div><svg class="servicio-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></li>
+      <li class="servicio"><span class="servicio-icono" aria-hidden="true"><svg><use href="#i-aire"/></svg></span><div class="servicio-texto"><h3><a href="#cita" data-servicio="Aire acondicionado">Aire acondicionado<span class="sr">: preguntar</span></a></h3><p>Si ya no enfría como antes, cuéntanos qué hace. En Almería es mejor no esperar al verano.</p></div><svg class="servicio-flecha" aria-hidden="true"><use href="#i-flecha"/></svg></li>
     </ul>
 
     <form class="recordatorio" id="recordatorio" novalidate>
@@ -326,7 +328,7 @@
       <details class="duda"><summary>¿Hacéis pre-ITV?<svg aria-hidden="true"><use href="#i-mas"/></svg></summary>
         <p>Sí. Dinos la fecha de tu ITV y buscamos hueco para revisarlo antes.</p></details>
       <details class="duda"><summary>¿Abrís los sábados?<svg aria-hidden="true"><use href="#i-mas"/></svg></summary>
-        <p>Los sábados abrimos <span data-horario-dia="6">(ver horario)</span>. Los festivos el taller está cerrado.</p></details>
+        <p>Los sábados abrimos <span data-horario-dia="6">(ver horario)</span>. Los domingos y festivos el taller está cerrado.</p></details>
       <details class="duda"><summary>¿Qué os mando por WhatsApp para ir más rápido?<svg aria-hidden="true"><use href="#i-mas"/></svg></summary>
         <p>Marca, modelo y año del coche, y qué le notas. Si es por ruedas, la medida del neumático. Si se ha encendido un testigo, una foto del cuadro ayuda mucho.</p></details>
     </div>
@@ -350,8 +352,7 @@
           <h3>Contacto</h3>
           <ul class="lista-contacto cifras">
             <li><span><svg aria-hidden="true"><use href="#i-tel"/></svg>Fijo</span><a href="tel:+34950885158">950 885 158</a></li>
-            <li><span><svg aria-hidden="true"><use href="#i-movil"/></svg>Móvil</span><a href="tel:+34668589283">668 589 283</a></li>
-            <li><span><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</span><a href="https://wa.me/34668589283">668 589 283</a></li>
+            <li><span><svg aria-hidden="true"><use href="#i-movil"/></svg>Móvil y WhatsApp</span><span class="contacto-valor"><a href="tel:+34668589283">668 589 283</a><a class="wa-mini" href="https://wa.me/34668589283" aria-label="Escribir por WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a></span></li>
             <li><span><svg aria-hidden="true"><use href="#i-correo"/></svg>Correo</span><a href="mailto:taller.romero22@hotmail.com">taller.romero22@hotmail.com</a></li>
             <li><span><svg aria-hidden="true"><use href="#i-ig"/></svg>Instagram</span><a href="https://www.instagram.com/tallerromero22/">@tallerromero22</a></li>
           </ul>
@@ -362,7 +363,6 @@
           <p class="estado-tabla"><span class="estado" data-estado data-abierto=""></span></p>
           <dl class="horario cifras" id="horario"><div><dt>Horario</dt><dd>Llama al 950 885 158</dd></div></dl>
           <p class="nota" id="aviso-verano" hidden></p>
-          <p class="nota" id="proximos-festivos" hidden>Cerrado por festivo: <span></span></p>
         </div>
       </div>
       <div class="mapa" id="mapa">
