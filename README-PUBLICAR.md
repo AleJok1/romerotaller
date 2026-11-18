@@ -49,6 +49,8 @@ Todo está en **`sitio/assets/config.js`**. La web lo usa para el «Abierto, cie
 
 En `config.js` → `resenas` están la nota (4,0), el total (30) y la `fecha` (18/11/2026), copiados de la ficha de Google, más los dos enlaces. Cuando cambien en Google, actualiza esos datos y el texto de respaldo de `index.html` (`#nota-google`), que es lo que se ve si falla el JavaScript. Nunca redondear hacia arriba. La nota va discreta, como dato, no como reclamo.
 
+Los textos de las 3 reseñas que se ven en la web están copiados literalmente de Google (confirmado por el propietario).
+
 - «Ver reseñas en Google» abre la ficha (`enlaceVer`).
 - «Dejar una reseña» abre directamente el formulario de reseña de Google (`enlaceResena`, hecho con el Place ID de la ficha). Si algún día falla, el enlace «Pedir reseñas» del Perfil de Empresa (`g.page/r/…/review`) sirve igual.
 - La nota no se manda a Google como datos estructurados a propósito: Google no admite que un negocio marque en su web sus propias valoraciones.
@@ -56,7 +58,7 @@ En `config.js` → `resenas` están la nota (4,0), el total (30) y la `fecha` (1
 ## 5. Fotos
 
 - **Miguel de pequeño en el kart**: ya está (`assets/miguel-kart.jpg/.webp` y `-720`), recortada sin la barra gris de la captura. Va en «Del kart al taller» frente a la foto de Miguel hoy, sin edad ni año a propósito.
-- **Silvia** [PENDIENTE]: `sitio/assets/silvia.jpg`, cuadrada (unos 400×400 px). Mientras no esté, sale un círculo con una «S».
+- **Silvia** — foto [PENDIENTE]: `sitio/assets/silvia.jpg`, cuadrada (unos 400×400 px). Mientras no esté, sale un círculo con una «S». Su papel ya está resuelto: lleva la oficina del taller.
 - **Fachada en grande** (opcional): la portada usa `fachada-llaves.jpg`, que solo existe a 1200 px. Si hay una versión de 2000 px o más, en pantallas grandes se verá más nítida; guárdala con el mismo nombre (y su `.webp`).
 
 Los nombres tienen que ser exactamente esos, en minúsculas.
@@ -79,9 +81,10 @@ Solo hay cuatro movimientos ligados al scroll, todos en CSS (sin librerías) y s
 Para encontrarlos todos: buscar `PENDIENTE` en `index.html`, `aviso-legal.html` y `config.js`.
 
 - Dominio y correo del dominio.
-- Foto de Silvia y qué lleva ella en el taller.
+- Foto de Silvia. Sigue pendiente.
+- Papel de Silvia: resuelto. Lleva la oficina del taller.
 - Festivos locales de Roquetas y si hay horario de verano.
-- Comprobar que las 3 reseñas de la web están copiadas tal cual de Google.
+- Reseñas: resuelto. Las 3 reseñas de la web están copiadas literalmente de Google (confirmado).
 - Respuestas de las dudas: presupuesto antes de tocar, garantía, marcas, formas de pago, qué no hacen, si hace falta cita. Están como borrador o vacías: que las confirmen ellos.
 - Aviso legal: NIF/CIF de TALLER ROMERO S.L.
 - ¿Tienen página de Facebook? (sale el icono en la fachada). Si la tienen, se añade el enlace.
