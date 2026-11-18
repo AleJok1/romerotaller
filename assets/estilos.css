@@ -1,0 +1,617 @@
+/* Taller Romero · estilos v3. Sin dependencias ni build.
+   Dirección: nave industrial de barrio. Chapa gris, rótulo pintado,
+   franja azul marino de la fachada y el turbo azul del logo como único acento. */
+@font-face{font-family:"Barlow";src:url(fonts/Barlow-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Barlow";src:url(fonts/Barlow-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Barlow";src:url(fonts/Barlow-SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Barlow Condensed";src:url(fonts/BarlowCondensed-Bold.woff2) format("woff2");font-weight:700;font-display:swap}
+
+:root{
+  /* Rampa neutra teñida hacia el gris chapa de la nave */
+  --n-950:#0b0d10;--n-900:#14171b;--n-850:#1a1e23;--n-700:#2b3139;
+  --t-1:#eef1f4;--t-2:#b7c0c9;--t-3:#8a949f;
+  --linea:rgb(238 241 244/.09);
+  /* Zona clara: chapa blanca del portón */
+  --c-50:#f3f4f5;--c-100:#e6e9ec;--ct-1:#15181c;--ct-2:#4a535d;--c-linea:rgb(21 24 28/.1);
+  /* Marca */
+  --turbo:#0098e0;--turbo-texto:#4cc0f2;--turbo-oscuro:#006c9e;--franja:#123a8c;
+  /* v5: azul marino de la franja de la fachada y grises del cartel y la chapa */
+  --marino:#0b2a6b;--marino-hondo:#071a40;--gris-cartel:#5a6f80;--gris-chapa:#79909e;--metal:#808080;
+  --wa:#25d366;--wa-texto:#04220e;--ok:#46c97c;--cerrado:#e2716b;--estrella:#d99a00;
+  --ancho:1200px;--r-control:10px;--r-tarjeta:16px;
+  --curva:cubic-bezier(.22,1,.36,1);
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --sans:"Barlow",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:dark;accent-color:var(--turbo);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%;scrollbar-color:var(--n-700) var(--n-950)}
+body{margin:0;background:var(--n-950);color:var(--t-1);font:400 1.0625rem/1.6 var(--sans);caret-color:var(--turbo)}
+::selection{background:var(--turbo);color:#00131d}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-underline-offset:.2em;text-decoration-thickness:1px}
+h1,h2,h3,p,figure,blockquote,dl,dd{margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1;text-wrap:balance}
+h2{font-size:clamp(2.25rem,1.5rem + 3vw,3.5rem);letter-spacing:-.01em}
+h3{font-size:1.5rem;line-height:1.1}
+p{text-wrap:pretty}
+p+p{margin-top:1em}
+:focus-visible{outline:3px solid var(--turbo-texto);outline-offset:3px;border-radius:4px}
+.envoltura{width:min(100% - 48px,var(--ancho));margin-inline:auto}
+.saltar{position:fixed;inset:12px auto auto 12px;z-index:50;background:#fff;color:#000;padding:12px 16px;border-radius:8px;transform:translateY(-200%)}
+.saltar:focus{transform:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.cifras{font-variant-numeric:tabular-nums}
+.pendiente.pendiente{background:#ffe066;color:#3b2f00;padding:0 .3em;border-radius:4px;font:600 .95em/1.5 var(--sans);outline:2px dashed #c9a400;outline-offset:1px}
+
+/* Botones: radio de control, sin pastillas, sin saltos al pasar el ratón */
+.boton{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 20px;border-radius:var(--r-control);border:1px solid rgb(238 241 244/.22);font:600 1rem/1.2 var(--sans);text-decoration:none;color:var(--t-1);background:transparent;cursor:pointer;transition:background-color .2s var(--curva),border-color .2s var(--curva),color .2s var(--curva),transform .1s var(--curva)}
+.boton svg{width:18px;height:18px;flex:none}
+.boton:hover{border-color:rgb(238 241 244/.5);background:rgb(238 241 244/.05)}
+.boton:active{transform:scale(.98)}
+.boton.wa{background:var(--wa);border-color:var(--wa);color:var(--wa-texto)}
+.boton.wa:hover{background:#3fe07c;border-color:#3fe07c}
+.acciones{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Cabecera */
+.cabecera{position:sticky;top:0;z-index:20;background:var(--n-950);border-bottom:1px solid transparent}
+.cabecera>.envoltura{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}
+.marca{display:flex;align-items:center;gap:12px;text-decoration:none}
+.marca img{width:48px;height:auto;view-transition-name:logo}
+.marca b{display:block;font:700 1.5rem/1 var(--display);text-transform:uppercase;letter-spacing:.01em}
+.marca small{display:block;color:var(--t-3);font-size:.9375rem;margin-top:2px}
+.menu{display:none;gap:28px;font-weight:500}
+.menu a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;color:var(--t-2);transition:color .2s var(--curva)}
+.menu a:hover{color:var(--t-1)}
+.cab-acciones{display:flex;gap:12px;align-items:center}
+.cab-acciones .tel{display:none;font-weight:600;text-decoration:none;white-space:nowrap}
+.cab-acciones .boton{min-height:44px;padding:10px 16px}
+/* Menú móvil con <details>: funciona en cualquier navegador y sin JS */
+.menu-movil{position:relative}
+.menu-movil summary{list-style:none;display:grid;place-items:center;width:44px;height:44px;border-radius:var(--r-control);border:1px solid rgb(238 241 244/.22);cursor:pointer}
+.menu-movil summary::-webkit-details-marker{display:none}
+.menu-movil summary svg{width:20px;height:20px}
+.menu-movil nav{position:absolute;inset:calc(100% + 8px) 0 auto auto;min-width:220px;display:grid;padding:8px;background:var(--n-850);border:1px solid var(--linea);border-radius:12px;box-shadow:0 12px 32px -12px rgb(0 0 0/.6)}
+.menu-movil nav a{padding:12px;border-radius:8px;text-decoration:none;font-weight:500}
+.menu-movil nav a:hover{background:rgb(238 241 244/.06)}
+
+/* Portada */
+
+.estado{display:inline-flex;align-items:center;gap:8px;color:var(--t-1);font-weight:500}
+.estado::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--t-3)}
+.estado[data-abierto="si"]::before{background:var(--ok)}
+.estado[data-abierto="no"]::before{background:var(--cerrado)}
+
+
+/* Franja de la fachada: la firma de la web */
+.franja{position:relative;height:16px;background:#f3f4f5;overflow:hidden}
+.franja::before{content:"";position:absolute;inset:5px 0;background:var(--franja);transform-origin:0 50%}
+
+/* Secciones */
+.seccion{padding-block:88px}
+.intro{display:grid;gap:12px;margin-bottom:48px;max-width:60ch}
+.intro p{color:var(--t-2);font-size:1.125rem}
+.clara{background:var(--c-50);color:var(--ct-1);color-scheme:light}
+.clara .intro p,.clara .tenue{color:var(--ct-2)}
+.clara a{color:var(--turbo-oscuro)}
+.clara .boton{color:var(--ct-1);border-color:rgb(21 24 28/.25)}
+.clara .boton:hover{border-color:rgb(21 24 28/.6);background:rgb(21 24 28/.04)}
+
+/* Servicios: lista rotulada, no una rejilla de tarjetas iguales */
+.servicios{list-style:none;padding:0;margin:0;display:grid;border-top:1px solid var(--c-linea)}
+.servicio{display:grid;gap:8px;padding-block:24px;border-bottom:1px solid var(--c-linea)}
+.servicio p{color:var(--ct-2);max-width:48ch}
+.servicio a{justify-self:start;display:inline-flex;align-items:center;min-height:44px;font-weight:600;text-decoration:none}
+.servicio a:hover{text-decoration:underline}
+.nota-servicios{margin-top:32px;color:var(--ct-2)}
+
+/* Pedir cita */
+.consulta-grid{display:grid;gap:40px;align-items:start}
+.pasos{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:16px;counter-reset:paso}
+.pasos li{display:grid;grid-template-columns:32px 1fr;gap:16px;counter-increment:paso;color:var(--t-2)}
+.pasos li::before{content:counter(paso);display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:1px solid var(--t-3);color:var(--t-1);font:700 1.0625rem/1 var(--display)}
+.pasos b{color:var(--t-1);font-weight:600;display:block}
+.panel{background:var(--n-900);border:1px solid var(--linea);border-radius:var(--r-tarjeta);padding:24px}
+.panel fieldset{border:0;padding:0;margin:0 0 24px}
+.panel legend,.panel label{display:block;font-weight:600;margin-bottom:12px}
+.opcional{font-weight:400;color:var(--t-3)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips label{display:inline-flex;align-items:center;min-height:44px;margin:0;padding:8px 16px;border:1px solid rgb(238 241 244/.22);border-radius:999px;font-weight:500;cursor:pointer;transition:background-color .15s var(--curva),border-color .15s var(--curva),color .15s var(--curva)}
+.chips label:hover{border-color:rgb(238 241 244/.5)}
+.chips input:checked+label{background:var(--t-1);border-color:var(--t-1);color:var(--n-950)}
+.chips input:focus-visible+label{outline:3px solid var(--turbo-texto);outline-offset:2px}
+.panel input[type=text],.panel textarea{width:100%;font:inherit;color:var(--t-1);background:var(--n-950);border:1px solid rgb(238 241 244/.22);border-radius:var(--r-control);padding:12px 14px;transition:border-color .15s var(--curva)}
+.panel textarea{min-height:88px;resize:vertical}
+.panel input[type=text]:focus-visible,.panel textarea:focus-visible{border-color:var(--turbo);outline:2px solid var(--turbo);outline-offset:0}
+.panel ::placeholder{color:var(--t-3);opacity:1}
+.campo{margin-bottom:20px}
+.vista-previa{white-space:pre-line;background:#0f2219;border:1px solid #1f4a35;color:#d7f5e4;border-radius:12px 12px 12px 4px;padding:14px 16px;font-size:.9375rem;margin-bottom:20px;view-transition-name:mensaje}
+.boton.ancho{width:100%}
+.nota{color:var(--t-2);font-size:1rem;margin-top:16px}
+
+/* Historia: el momento de la web */
+.historia{overflow-x:clip}
+
+/* Opiniones: una destacada y dos secundarias */
+.resenas{display:grid;gap:40px}
+.resena blockquote{line-height:1.45}
+.resena figcaption{color:var(--ct-2);font-size:.9375rem;margin-top:16px}
+.resena figcaption b{color:var(--ct-1);font-weight:600}
+.estrellas{display:block;color:var(--estrella);letter-spacing:.1em;font-size:.875rem;margin-bottom:12px}
+.resena.principal blockquote{font:500 clamp(1.5rem,1.1rem + 1.4vw,2.125rem)/1.25 var(--sans);letter-spacing:-.01em;max-width:30ch}
+.secundarias{display:grid;gap:32px;align-content:start}
+.secundarias .resena{padding-top:24px;border-top:1px solid var(--c-linea)}
+.secundarias blockquote{font-size:1.125rem}
+.pie-resenas{margin-top:48px;padding-top:24px;border-top:1px solid var(--c-linea);display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+
+/* Dudas */
+.dudas-grid{display:grid;gap:32px}
+details.duda{border-bottom:1px solid var(--linea)}
+details.duda summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:64px;padding-block:16px;font-weight:600;font-size:1.125rem}
+details.duda summary::-webkit-details-marker{display:none}
+details.duda summary svg{width:18px;height:18px;flex:none;color:var(--t-3);transition:rotate .25s var(--curva)}
+details.duda[open] summary svg{rotate:45deg}
+details.duda p{padding-bottom:20px;color:var(--t-2);max-width:60ch}
+
+/* Contacto */
+.contacto-grid{display:grid;gap:40px}
+.datos-contacto{display:grid;gap:32px}
+address{font-style:normal;font-size:1.25rem;line-height:1.4}
+.lista-contacto{list-style:none;padding:0;margin:0;display:grid}
+.lista-contacto li{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center;border-bottom:1px solid var(--linea)}
+.lista-contacto span{color:var(--t-3)}
+.lista-contacto a{display:flex;align-items:center;min-height:48px;text-decoration:none;font-weight:500;overflow-wrap:anywhere;min-width:0}
+.lista-contacto a:hover{text-decoration:underline}
+.horario div{display:flex;justify-content:space-between;gap:12px;padding-block:10px;border-bottom:1px solid var(--linea)}
+.horario dt{color:var(--t-2)}
+.horario dd{font-weight:500}
+.horario .hoy dt,.horario .hoy dd{color:var(--t-1);font-weight:600}
+.horario .hoy dt::after{content:" (hoy)";font-weight:400;color:var(--t-3)}
+.datos-contacto h3{margin-bottom:12px}
+.mapa{position:relative;border-radius:var(--r-tarjeta);overflow:hidden;aspect-ratio:4/3;background:var(--n-900)}
+.mapa img,.mapa iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.mapa img{filter:brightness(.3) saturate(.5)}
+.mapa .capa{background:rgb(13 15 18/.5)}
+.mapa .capa{position:relative;color:var(--t-1);z-index:1;height:100%;display:grid;place-content:center;justify-items:center;gap:12px;padding:24px;text-align:center}
+.mapa .capa p{font-size:.9375rem;color:var(--t-2);max-width:36ch}
+
+
+/* Pie */
+.pie{border-top:1px solid var(--linea);padding-block:40px 112px;color:var(--t-2);font-size:1rem;overflow-wrap:anywhere}
+.pie>.envoltura{display:grid;gap:24px}
+.pie a{color:var(--t-2)}
+.pie b{display:block;color:var(--t-1);font:700 1.25rem/1 var(--display);text-transform:uppercase;margin-bottom:8px}
+
+
+/* Barra móvil */
+.barra-movil{position:fixed;inset:auto 0 0;z-index:30;display:grid;grid-template-columns:1fr 1.4fr;gap:8px;padding:8px 16px calc(8px + env(safe-area-inset-bottom));background:var(--n-950);border-top:1px solid var(--linea)}
+
+/* Página legal */
+.legal{padding-block:56px 96px;max-width:720px}
+.legal h1{font-size:clamp(2.5rem,1.8rem + 3vw,3.5rem);margin-bottom:28px}
+.legal h2{font-size:1.75rem;margin:40px 0 12px}
+.legal p,.legal li{color:var(--t-2)}
+
+@media (min-width:700px){
+  .cab-acciones .tel{display:inline-flex;align-items:center;min-height:44px}
+  .servicios{grid-template-columns:1fr 1fr;column-gap:48px}
+  .contacto-grid{grid-template-columns:1fr 1fr}
+  .datos-contacto{grid-template-columns:1fr 1fr;grid-column:1/-1}
+  .mapa{grid-column:1/-1;aspect-ratio:16/9}
+}
+@media (min-width:1000px){
+  .menu{display:flex}
+  .menu-movil{display:none}
+    .servicios{grid-template-columns:repeat(3,1fr)}
+  .servicio{padding-inline-end:16px}
+  .consulta-grid{grid-template-columns:.85fr 1.15fr;gap:64px}
+  .resenas{grid-template-columns:1.4fr 1fr;gap:64px}
+  .dudas-grid{grid-template-columns:.8fr 1.2fr;gap:64px}
+  .contacto-grid{grid-template-columns:1fr 1.3fr;gap:64px;align-items:start}
+  .datos-contacto{grid-template-columns:1fr;grid-column:auto}
+  .mapa{grid-column:auto;aspect-ratio:auto;height:100%;min-height:440px}
+  .pie>.envoltura{grid-template-columns:1.2fr 1fr 1fr;align-items:start}
+  .barra-movil{display:none}
+  .pie{padding-bottom:40px}
+  .seccion{padding-block:112px}
+}
+@media (max-width:699px){
+  .envoltura{width:min(100% - 40px,var(--ancho))}
+  .marca small{display:none}
+  .cab-acciones .boton.wa{display:none}
+  }
+
+/* ============ v4 ============ */
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.datos-hoy{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:4px}
+.datos-hoy li{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;min-height:44px}
+.datos-hoy .tenue{color:var(--t-2)}
+.estado{font-size:1rem}
+.como-llegar{display:inline-flex;align-items:center;gap:10px;min-height:48px;text-decoration:none;color:var(--t-1);font-weight:500}
+.como-llegar svg{width:20px;height:20px;color:var(--turbo-texto);flex:none}
+.como-llegar u{text-decoration-color:var(--turbo-texto);text-underline-offset:.25em}
+.boton-claro{background:var(--t-1);color:var(--n-950);border-color:var(--t-1)}
+.boton-claro:hover{background:#fff;border-color:#fff}
+.boton.boton-oscuro,.clara .boton.boton-oscuro{background:var(--ct-1);color:#fff;border-color:var(--ct-1)}
+.clara .boton.boton-oscuro:hover{background:#2b3139}
+.enlace-ig{margin-top:24px}
+.enlace-ig a,.enlace-mapa,.pie-enlaces a{display:inline-flex;align-items:center;min-height:44px}
+.pie b{margin-bottom:4px}
+.pie p{margin:0}
+.pie-enlaces{list-style:none;margin:0;padding:0;display:grid}
+.pie-enlaces a{color:var(--t-2)}
+.estado-tabla{margin-bottom:8px}
+.guardar{margin-top:20px}
+.etiqueta-vista{font-weight:600;margin-bottom:8px}
+.sintomas legend{margin-top:4px}
+.con-pendiente{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px}
+#nota-google{font-size:1.125rem;color:var(--ct-1);font-weight:500}
+/* Recordatorio de calendario: una franja de trabajo dentro de Servicios */
+.recordatorio{margin-top:56px;display:grid;gap:20px;padding:24px;border-radius:var(--r-tarjeta);background:#fff;border:1px solid var(--c-linea)}
+.recordatorio h3{margin-bottom:8px}
+.recordatorio p{color:var(--ct-2);max-width:46ch}
+.rec-campos{display:grid;gap:16px;align-items:end}
+.campo-c label{display:block;font-weight:600;margin-bottom:8px}
+.recordatorio select,.recordatorio input[type=date]{width:100%;min-height:48px;font:inherit;color:var(--ct-1);background:var(--c-50);border:1px solid rgb(21 24 28/.25);border-radius:var(--r-control);padding:10px 12px}
+.recordatorio select:focus-visible,.recordatorio input:focus-visible{outline:3px solid var(--turbo-oscuro);outline-offset:1px}
+.rec-mensaje{grid-column:1/-1;font-weight:500;color:var(--ct-1)}
+.rec-mensaje.error{color:#a3241c}
+/* Silvia */
+.silvia{display:grid;grid-template-columns:72px 1fr;gap:16px;align-items:center;margin-top:20px;color:var(--t-2);font-size:1.125rem}
+.silvia img{width:72px;height:72px;border-radius:50%;object-fit:cover}
+.silvia .inicial{display:none;width:72px;height:72px;border-radius:50%;place-items:center;background:var(--n-850);border:1px dashed var(--t-3);font:700 1.75rem/1 var(--display);color:var(--t-2)}
+.silvia.sin-foto .inicial{display:grid}
+@media (min-width:700px){
+  .rec-campos{grid-template-columns:1fr 1fr 1fr auto}
+}
+@media (min-width:1000px){
+  .recordatorio{grid-template-columns:1fr 2fr;align-items:center;padding:32px}
+}
+
+/* ============ Movimiento ============
+   Por defecto todo está quieto y visible. El movimiento se activa solo
+   con prefers-reduced-motion: no-preference y, para el ligado al scroll,
+   solo si el navegador lo soporta de verdad. Una curva para todo. */
+@media (prefers-reduced-motion:no-preference){
+  /* Cambio de página suave (portada <-> aviso legal) */
+  @view-transition{navigation:auto}
+  ::view-transition-old(root),::view-transition-new(root){animation-duration:.3s}
+  ::view-transition-old(mensaje),::view-transition-new(mensaje){animation-duration:.2s}
+
+}
+
+@supports (animation-timeline:scroll()) and (animation-range:0% 100%){
+  @media (prefers-reduced-motion:no-preference){
+    /* Estado: la cabecera marca su borde cuando ya hay contenido debajo */
+    .cabecera{animation:cabecera linear both;animation-timeline:scroll(root);animation-range:0 96px}
+  }
+}
+@keyframes cabecera{to{border-bottom-color:var(--linea);background-color:rgb(11 13 16/.94)}}
+
+@supports (animation-timeline:view()) and (animation-range:entry 0% entry 100%){
+  @media (prefers-reduced-motion:no-preference){
+    /* Firma: la franja azul se pinta de izquierda a derecha, como el rótulo */
+    .franja::before{animation:pintar-franja linear both;animation-timeline:view();animation-range:entry 20% cover 45%}
+  }
+}
+@keyframes pintar-franja{from{transform:scaleX(.08)}to{transform:scaleX(1)}}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Páginas sueltas: legal y 404 */
+.volver{margin-top:40px}
+.pie-corto{padding-block:32px}
+.error-pagina{min-height:70vh;display:grid;align-content:center;gap:20px;padding-block:72px}
+.error-pagina .codigo{font:700 clamp(4.5rem,18vw,9rem)/.85 var(--display);color:transparent;-webkit-text-stroke:2px var(--turbo-texto);letter-spacing:.02em}
+.error-pagina h1{font-size:clamp(2rem,6vw,3.25rem)}
+.error-pagina p{color:var(--t-2);font-size:1.125rem;max-width:44ch}
+.error-pagina .acciones{margin-top:8px}
+.error-pagina .enlaces{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-wrap:wrap;gap:4px 24px}
+.error-pagina .enlaces a{display:inline-flex;align-items:center;min-height:44px}
+
+/* Texto ampliado al 200 %: que nada se salga de la pantalla */
+h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
+.cabecera .envoltura{flex-wrap:wrap}
+.legal{overflow-wrap:anywhere}
+.recordatorio,.rec-campos{grid-template-columns:minmax(0,1fr)}
+.recordatorio select{min-width:0;text-overflow:ellipsis}
+@media (min-width:700px){.rec-campos{grid-template-columns:repeat(3,minmax(0,1fr)) auto}}
+@media (min-width:1000px){.recordatorio{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}}
+.consulta-grid>*,.contacto-grid>*,.dudas-grid>*{min-width:0}
+.pasos,.panel{overflow-wrap:break-word}
+.pendiente{overflow-wrap:anywhere}
+.boton{max-width:100%;text-align:center}
+#fecha-resenas{margin-top:-10px;font-size:1rem}
+
+/* ============ v5 · portada e historia ============
+   Paleta: negro del logo, azul turbo del logo, azul marino de la franja
+   de la fachada y grises del cartel y la chapa. Sin cremas. */
+.cabecera{background:rgb(11 13 16/.6);-webkit-backdrop-filter:blur(14px) saturate(1.15);backdrop-filter:blur(14px) saturate(1.15)}
+.menu a{position:relative}
+.menu a::after{content:"";position:absolute;inset:auto 0 8px;height:2px;border-radius:2px;background:var(--turbo);transform:scaleX(0);transform-origin:0 50%;transition:transform .3s var(--curva)}
+.menu a:hover::after,.menu a:focus-visible::after{transform:scaleX(1)}
+.boton{border-radius:12px;letter-spacing:.005em}
+.boton.wa{box-shadow:0 12px 32px -14px rgb(37 211 102/.65)}
+.boton-cristal{background:rgb(238 241 244/.07);border-color:rgb(238 241 244/.24);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.boton-cristal:hover{background:rgb(238 241 244/.14);border-color:rgb(238 241 244/.5)}
+.ceja{display:flex;align-items:center;gap:12px;font:600 .8125rem/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gris-chapa)}
+.ceja::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--turbo);flex:none}
+
+/* Portada: la nave a toda pantalla, el texto abajo a la izquierda */
+.portada{position:relative;isolation:isolate;margin-top:-73px;min-height:100vh;min-height:100svh;display:grid;align-items:end;padding:calc(73px + 40px) 0 96px;overflow:clip;background:var(--n-950)}
+.portada-media{position:absolute;inset:0;z-index:-1;overflow:hidden;transform-origin:50% 0}
+.portada-media picture,.portada-media img{width:100%;height:100%}
+.portada-media img{object-fit:cover;object-position:60% 22%}
+.portada-media::after{content:"";position:absolute;inset:0;background:
+  radial-gradient(120% 70% at 0% 100%,rgb(11 42 107/.5),transparent 62%),
+  linear-gradient(180deg,rgb(11 13 16/.5) 0%,rgb(11 13 16/.08) 18%,rgb(11 13 16/.35) 34%,rgb(11 13 16/.88) 52%,var(--n-950) 82%)}
+.portada-contenido{display:grid;justify-items:start}
+.portada .ceja{letter-spacing:0;text-transform:none;font:500 1rem/1.2 var(--sans);color:var(--t-1);padding:9px 14px;border-radius:10px;background:rgb(11 13 16/.55);border:1px solid rgb(238 241 244/.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.portada .ceja::before{display:none}
+.portada h1{font-size:clamp(2.9rem,1.1rem + 7.4vw,6.5rem);line-height:.86;letter-spacing:-.015em;text-transform:uppercase;margin:18px 0 20px;max-width:11ch;text-shadow:0 2px 40px rgb(0 0 0/.35)}
+.portada h1 span{display:block;color:var(--turbo)}
+.portada .entrada{font-size:clamp(1.125rem,1rem + .5vw,1.375rem);line-height:1.5;color:var(--t-2);max-width:40ch;margin-bottom:26px}
+.portada .acciones .boton{min-height:54px;padding-inline:22px;font-size:1.0625rem}
+.portada .datos-hoy{width:100%;max-width:780px;margin:28px 0 0;padding:0;display:grid;gap:0;border-top:1px solid rgb(238 241 244/.16)}
+.portada .datos-hoy li{display:flex;align-items:flex-start;gap:14px;min-height:0;padding:16px 0}
+.portada .datos-hoy li+li{border-top:1px solid rgb(238 241 244/.1)}
+.portada .datos-hoy svg{width:22px;height:22px;flex:none;margin-top:1px;color:var(--turbo-texto)}
+.portada .datos-hoy li>span{display:grid;gap:2px;color:var(--t-2)}
+.portada .datos-hoy b{color:var(--t-1);font-weight:600}
+.portada .como-llegar{display:inline;min-height:0;color:var(--t-2);font-weight:400;text-decoration:underline;text-decoration-color:var(--turbo-texto);text-underline-offset:.25em}
+.portada .como-llegar:hover{color:var(--t-1)}
+@media (min-width:700px){
+  .portada .datos-hoy{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .portada .datos-hoy li+li{border-top:0;border-left:1px solid rgb(238 241 244/.12);padding-left:24px}
+}
+@media (min-width:1000px){
+  .portada{min-height:min(100svh,1000px);padding-bottom:40px}
+  .portada-media img{object-position:50% 38%}
+  .portada-media::after{background:
+    radial-gradient(90% 90% at 0% 100%,rgb(11 42 107/.55),transparent 60%),
+    linear-gradient(90deg,rgb(11 13 16/.94) 0%,rgb(11 13 16/.8) 34%,rgb(11 13 16/.3) 62%,rgb(11 13 16/.15) 100%),
+    linear-gradient(0deg,var(--n-950) 0%,rgb(11 13 16/0) 30%),
+    linear-gradient(180deg,rgb(11 13 16/.55) 0%,rgb(11 13 16/0) 22%)}
+}
+@media (max-width:699px){
+  .portada{padding:calc(73px + 24px) 0 76px}
+  .portada h1{margin:14px 0 14px}
+  .portada .entrada{margin-bottom:20px;font-size:1.0625rem}
+  .portada .acciones{width:100%;display:grid;grid-template-columns:1fr;gap:10px}
+  .portada .acciones .boton{min-height:50px}
+  .portada .datos-hoy{margin-top:18px}
+  .portada .datos-hoy li{padding:11px 0}
+  .portada .ceja{font-size:.9375rem;padding:7px 12px}
+}
+
+/* Historia: antes y después */
+.historia{background:radial-gradient(70% 50% at 100% 0%,rgb(11 42 107/.32),transparent 70%),var(--n-950)}
+.historia-intro{max-width:64ch;margin-bottom:56px}
+.historia-intro h2{font-size:clamp(3rem,1.3rem + 6.6vw,7rem);line-height:.88;letter-spacing:-.015em;text-transform:uppercase;margin:18px 0 28px}
+.historia-intro h2 span{color:var(--turbo)}
+.historia-entrada{font-size:clamp(1.1875rem,1rem + .7vw,1.5rem);line-height:1.5;color:var(--t-2);max-width:42ch}
+.antes-despues{position:relative;display:grid;gap:48px}
+.foto-tiempo{min-width:0}
+.foto-tiempo .marco{position:relative;border-radius:20px;overflow:hidden;background:var(--n-900);box-shadow:0 48px 80px -48px rgb(0 0 0/.95),0 0 0 1px rgb(238 241 244/.08)}
+.foto-tiempo .marco::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgb(238 241 244/.1);pointer-events:none}
+.foto-tiempo picture,.foto-tiempo img{width:100%;height:100%}
+.foto-tiempo img{object-fit:cover}
+.antes .marco{aspect-ratio:1144/1019}
+.ahora .marco{aspect-ratio:4/5}
+.ahora img{object-position:50% 45%}
+.foto-tiempo figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-top:20px;padding-top:16px;border-top:1px solid rgb(238 241 244/.14);color:var(--t-2);font-size:1rem;min-height:78px}
+.foto-tiempo figcaption{display:block}
+.foto-tiempo figcaption b{display:block;margin-bottom:6px;font:700 1.625rem/1 var(--display);letter-spacing:.04em;text-transform:uppercase}
+.antes figcaption b{color:var(--gris-chapa)}
+.ahora figcaption b{color:var(--turbo-texto)}
+.trayecto{display:none}
+.historia-pie{display:grid;gap:8px;margin-top:56px;max-width:64ch}
+.historia-pie .silvia{margin-top:0}
+@media (min-width:1000px){
+  .antes-despues{grid-template-columns:7fr 5fr;align-items:end;gap:48px}
+  .trayecto{display:block;position:absolute;left:0;right:0;bottom:calc(78px - 1px);height:2px;border-radius:2px;background:linear-gradient(90deg,var(--gris-chapa),var(--turbo));transform-origin:0 50%}
+  .historia-intro{max-width:none;display:grid;grid-template-columns:1.1fr 1fr;column-gap:64px;align-items:end;margin-bottom:72px}
+  .historia-intro .ceja{grid-column:1/-1}
+  .historia-intro h2{margin-bottom:0}
+  .historia-entrada{padding-bottom:6px}
+  .historia-pie{grid-template-columns:1fr auto;align-items:center;max-width:none;gap:32px}
+}
+
+/* Movimiento v5: solo dos momentos, ligados al scroll */
+@supports (animation-timeline:scroll()) and (animation-range:0% 100%){
+  @media (prefers-reduced-motion:no-preference){
+    /* La portada se aleja: la nave se encoge un poco y se recorta como una tarjeta */
+    .portada-media{animation:alejar linear both;animation-timeline:scroll(root);animation-range:0 90vh}
+    .portada-media img{animation:enfocar linear both;animation-timeline:scroll(root);animation-range:0 90vh}
+  }
+}
+@keyframes alejar{to{scale:.9;border-radius:32px;opacity:.55}}
+@keyframes enfocar{from{scale:1.06}to{scale:1}}
+@supports (animation-timeline:view()) and (animation-range:entry 0% entry 100%){
+  @media (prefers-reduced-motion:no-preference){
+    /* Antes y después: el kart sube un poco; el Miguel de hoy se descubre de izquierda a derecha y la línea del camino se traza */
+    .antes .marco img{animation:paralaje linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+    .ahora .marco{animation:descubrir linear both;animation-timeline:view();animation-range:entry 35% cover 50%}
+    .ahora .marco img{animation:acercar linear both;animation-timeline:view();animation-range:entry 35% cover 50%}
+  }
+  /* En escritorio las dos fotos van a la par: comparten la línea de tiempo del bloque */
+  @media (prefers-reduced-motion:no-preference) and (min-width:1000px){
+    .antes-despues{view-timeline:--ad block}
+    .ahora .marco,.ahora .marco img{animation-timeline:--ad;animation-range:entry 30% cover 44%}
+    .trayecto{animation:trazar linear both;animation-timeline:--ad;animation-range:entry 35% cover 47%}
+  }
+}
+@keyframes paralaje{from{scale:1.07;translate:0 2.5%}to{scale:1.07;translate:0 -2.5%}}
+@keyframes descubrir{from{clip-path:inset(0 100% 0 0 round 20px)}to{clip-path:inset(0 0 0 0 round 20px)}}
+@keyframes acercar{from{scale:1.14}to{scale:1}}
+@keyframes trazar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ============ v5 · resto de secciones ============
+   Mismo lenguaje que portada e historia: ceja, titular grande en mayúsculas
+   con la segunda parte en azul, más aire, tarjetas con borde fino y sombra larga. */
+.seccion{padding-block:96px}
+.intro{gap:16px;margin-bottom:56px;max-width:64ch}
+.seccion :is(.intro,.cita-texto,.dudas-intro)>h2{font-size:clamp(2.6rem,1.3rem + 4.6vw,5.25rem);line-height:.9;letter-spacing:-.012em;text-transform:uppercase;margin-top:4px}
+.seccion :is(.intro,.cita-texto,.dudas-intro)>h2 span{display:block;color:var(--turbo)}
+.clara :is(.intro)>h2 span{color:var(--turbo-oscuro)}
+.clara .ceja{color:var(--gris-cartel)}
+.clara .ceja::before{background:var(--turbo-oscuro)}
+.intro>p:not(.ceja){font-size:clamp(1.125rem,1rem + .4vw,1.3125rem);line-height:1.55}
+.tenue{color:var(--t-2)}
+
+/* Servicios: filas rotuladas con icono, no una rejilla de tarjetas */
+.servicios{grid-template-columns:minmax(0,1fr)!important;column-gap:0;border-top:0}
+.servicio{position:relative;grid-template-columns:52px minmax(0,1fr);gap:6px 20px;align-items:start;padding-block:28px;border-bottom:0;padding-inline-end:0}
+.servicio::before{content:"";position:absolute;inset:0 0 auto;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--turbo-oscuro),rgb(0 108 158/.12) 70%);transform-origin:0 50%}
+.servicio:last-child{border-bottom:1px solid var(--c-linea)}
+.servicio-icono{grid-row:span 2;display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#fff;border:1px solid var(--c-linea);color:var(--turbo-oscuro);box-shadow:0 10px 24px -16px rgb(21 24 28/.45)}
+.servicio-icono svg{width:26px;height:26px}
+.servicio h3{font-size:clamp(1.625rem,1.25rem + 1.1vw,2.375rem);line-height:1;text-transform:uppercase;letter-spacing:.005em}
+.servicio p{margin-top:10px;font-size:1.0625rem;color:var(--ct-2);max-width:52ch}
+.clara .servicio a{grid-column:2;justify-self:start;display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-top:6px;font-weight:600;color:var(--ct-1);text-decoration:none}
+.servicio a svg{width:18px;height:18px;color:var(--turbo-oscuro);transition:translate .25s var(--curva)}
+.servicio a:hover{text-decoration:underline;text-underline-offset:.3em}
+.servicio a:hover svg{translate:4px 0}
+@media (min-width:1000px){
+  .servicio{grid-template-columns:64px minmax(0,1fr) auto;align-items:center;gap:40px;padding-block:36px}
+  .servicio-icono{grid-row:auto;width:64px;height:64px;border-radius:16px}
+  .servicio-icono svg{width:30px;height:30px}
+  .servicio-texto{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:40px;align-items:center}
+  .servicio p{margin:0}
+  .clara .servicio a{grid-column:auto;margin:0;padding:10px 18px;border:1px solid rgb(21 24 28/.18);border-radius:12px;background:#fff;transition:border-color .2s var(--curva),box-shadow .2s var(--curva)}
+  .clara .servicio a:hover{text-decoration:none;border-color:var(--turbo-oscuro);box-shadow:0 10px 24px -16px rgb(0 108 158/.6)}
+}
+
+/* Recordatorio: tarjeta azul marino de la franja de la fachada */
+.recordatorio{position:relative;overflow:hidden;margin-top:80px;padding:28px;border:0;border-radius:24px;color:var(--t-1);color-scheme:dark;background:radial-gradient(80% 120% at 100% 0%,rgb(0 152 224/.28),transparent 60%),linear-gradient(135deg,var(--marino),var(--marino-hondo));box-shadow:0 48px 80px -48px rgb(7 26 64/.85)}
+.recordatorio h3{font-size:clamp(1.75rem,1.4rem + 1.2vw,2.5rem);text-transform:uppercase;margin-bottom:10px}
+.recordatorio p{color:#c9d4ea}
+.recordatorio .campo-c label{color:#fff}
+.recordatorio select,.recordatorio input[type=date]{background:rgb(255 255 255/.08);color:#fff;border:1px solid rgb(255 255 255/.28)}
+.recordatorio select option{background:var(--marino-hondo);color:#fff}
+.recordatorio select:focus-visible,.recordatorio input:focus-visible{outline:3px solid var(--turbo-texto);outline-offset:1px}
+.clara .recordatorio .boton.boton-oscuro{background:#fff;color:var(--marino-hondo);border-color:#fff;min-height:48px}
+.clara .recordatorio .boton.boton-oscuro:hover{background:#e6edf8}
+.recordatorio .rec-mensaje{color:#fff}
+.recordatorio .rec-mensaje.error{color:#ffc2bc}
+@media (min-width:1000px){.recordatorio{padding:40px 44px}}
+
+/* Pedir cita */
+#cita{background:radial-gradient(60% 45% at 0% 100%,rgb(11 42 107/.35),transparent 70%),var(--n-950)}
+.pasos{position:relative;margin-top:40px;gap:28px}
+.pasos::before{content:"";position:absolute;left:21px;top:44px;bottom:44px;width:1px;background:linear-gradient(var(--turbo),rgb(0 152 224/.1))}
+.pasos li{grid-template-columns:44px 1fr;gap:20px;align-items:center;font-size:1.0625rem}
+.pasos li::before{position:relative;width:44px;height:44px;border-radius:12px;border:1px solid rgb(0 152 224/.45);background:var(--n-950);box-shadow:inset 0 0 0 100px rgb(0 152 224/.12);color:var(--turbo-texto);font-size:1.375rem}
+.pasos b{font-size:1.25rem;margin-bottom:2px}
+.cita-llamar{display:flex;align-items:center;gap:16px;margin-top:40px;padding:20px 22px;border-radius:18px;background:var(--n-900);border:1px solid var(--linea);color:var(--t-2)}
+.cita-llamar svg{width:26px;height:26px;flex:none;color:var(--turbo-texto)}
+.cita-llamar a{display:inline-block;color:var(--t-1);font-weight:600;font-size:1.25rem;text-decoration-color:var(--turbo-texto)}
+.panel{padding:24px;border-radius:24px;background:linear-gradient(180deg,var(--n-850),var(--n-900));border:1px solid rgb(238 241 244/.1);box-shadow:0 48px 80px -48px rgb(0 0 0/.95),inset 0 1px 0 rgb(238 241 244/.06)}
+.panel legend{font-size:1.0625rem}
+.chips label{border-radius:10px;background:rgb(238 241 244/.03)}
+.chips input:checked+label{background:var(--turbo);border-color:var(--turbo);color:#00131d}
+.panel input[type=text],.panel textarea{min-height:52px;border-radius:12px}
+@media (min-width:1000px){
+  .consulta-grid{gap:96px}
+  .cita-texto{position:sticky;top:120px}
+  .panel{padding:36px}
+}
+
+/* Quiénes somos: el resto (Silvia e Instagram) */
+.historia-pie .silvia{grid-template-columns:88px 1fr;gap:20px;padding:20px 24px 20px 20px;border-radius:20px;background:var(--n-900);border:1px solid var(--linea)}
+.historia-pie .silvia img,.historia-pie .silvia .inicial{width:88px;height:88px}
+.historia-pie .silvia .inicial{font-size:2.25rem;border-color:var(--gris-cartel)}
+.historia-pie .enlace-ig{margin:0}
+.enlace-ig .boton{min-height:52px}
+
+/* Opiniones: el dato real discreto, las reseñas como protagonistas */
+#nota-google{font-size:1.0625rem;font-weight:600}
+.resena.principal{position:relative;align-self:start;padding:36px 28px 32px;border-radius:24px;background:#fff;border:1px solid var(--c-linea);box-shadow:0 40px 80px -48px rgb(21 24 28/.45)}
+.resena.principal::before{content:"“" / "";position:absolute;top:-6px;right:24px;font:700 8rem/1 var(--display);color:var(--turbo-oscuro);opacity:.16}
+.resena.principal blockquote{font-size:clamp(1.5rem,1.1rem + 1.5vw,2.375rem);line-height:1.22;max-width:26ch}
+.secundarias{gap:20px}
+.secundarias .resena{padding:26px 26px 22px;border:1px solid var(--c-linea);border-radius:20px;background:#fff}
+.pie-resenas{margin-top:40px;padding-top:0;border-top:0}
+@media (min-width:1000px){.resena.principal{padding:48px 48px 40px}}
+
+/* Preguntas frecuentes */
+.dudas-intro{display:grid;gap:16px;align-content:start;justify-items:start}
+.seccion .dudas-intro>h2{font-size:clamp(2.6rem,1.3rem + 4.6vw,4.5rem)}
+.dudas-intro>p:not(.ceja){color:var(--t-2);font-size:1.125rem}
+.dudas-intro .boton{margin-top:8px}
+.dudas-lista{border-top:1px solid var(--linea)}
+details.duda summary{min-height:80px;padding-block:20px;font-size:clamp(1.125rem,1rem + .4vw,1.3125rem);transition:color .2s var(--curva)}
+details.duda summary:hover{color:#fff}
+details.duda summary svg{box-sizing:border-box;width:38px;height:38px;padding:9px;border-radius:50%;border:1px solid rgb(238 241 244/.2);color:var(--t-1);transition:rotate .25s var(--curva),background-color .2s var(--curva),border-color .2s var(--curva)}
+details.duda[open] summary svg{background:var(--turbo);border-color:var(--turbo);color:#00131d}
+details.duda p{font-size:1.0625rem;padding-bottom:28px}
+@media (min-width:1000px){.dudas-intro{position:sticky;top:120px}}
+
+/* Contacto */
+#contacto{background:radial-gradient(60% 45% at 100% 0%,rgb(11 42 107/.3),transparent 70%),var(--n-950)}
+#contacto address{font-size:clamp(1.375rem,1.1rem + .8vw,1.75rem);font-weight:500;line-height:1.3}
+#contacto .intro .boton{margin-top:8px}
+.tarjeta{padding:24px;border-radius:20px;background:var(--n-900);border:1px solid var(--linea);box-shadow:0 40px 70px -50px rgb(0 0 0/.9)}
+.tarjeta h3{font-size:1.75rem;text-transform:uppercase}
+.lista-contacto li{grid-template-columns:118px minmax(0,1fr)}
+.lista-contacto span{display:inline-flex;align-items:center;gap:10px;color:var(--t-2)}
+.lista-contacto span svg{width:18px;height:18px;flex:none;color:var(--turbo-texto)}
+.lista-contacto li:last-child,.horario div:last-child{border-bottom:0}
+.horario .hoy{margin-inline:-12px;padding-inline:12px;border-radius:10px;background:rgb(0 152 224/.1);border-bottom-color:transparent}
+.mapa{border-radius:24px;box-shadow:0 48px 80px -48px rgb(0 0 0/.95),0 0 0 1px var(--linea)}
+@media (min-width:1000px){.tarjeta{padding:32px}}
+
+/* Pie */
+.pie{padding-block:72px 120px;background:linear-gradient(180deg,var(--n-950),#07090c);border-top:1px solid var(--linea)}
+.pie>.envoltura:first-child{display:grid;gap:36px}
+.pie .marca{margin-bottom:16px}
+.pie .marca img{width:56px}
+.pie .marca small{display:block}
+.pie-titulo{font:600 .8125rem/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gris-chapa);margin-bottom:12px}
+.pie-enlaces a{color:var(--t-2);text-decoration:none}
+.pie-enlaces a:hover{color:var(--t-1);text-decoration:underline}
+.pie-final{display:flex!important;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;margin-top:56px;padding-top:20px;border-top:1px solid var(--linea);font-size:.9375rem;color:var(--t-3)}
+.pie-final a{display:inline-flex;align-items:center;min-height:44px;color:var(--t-2)}
+@media (min-width:700px){.pie>.envoltura:first-child{grid-template-columns:1fr 1fr}}
+@media (min-width:1000px){.pie>.envoltura:first-child{grid-template-columns:1.5fr 1fr 1fr 1fr;align-items:start}.pie{padding-bottom:40px}}
+
+/* Barra móvil de cristal */
+.barra-movil{background:rgb(11 13 16/.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+
+/* 404 y aviso legal */
+.error-pagina{min-height:76vh}
+.error-pagina .codigo{font-size:clamp(6rem,24vw,13rem);-webkit-text-stroke:2px var(--turbo)}
+.error-pagina h1{font-size:clamp(2.6rem,1.4rem + 4.6vw,5rem);line-height:.9;text-transform:uppercase}
+.legal{padding-block:72px 112px;max-width:780px}
+.legal h1{font-size:clamp(2.6rem,1.4rem + 4.6vw,4.75rem);line-height:.9;text-transform:uppercase;margin:12px 0 32px}
+.legal h1 span{display:block;color:var(--turbo)}
+.legal h2{font-size:clamp(1.5rem,1.2rem + 1vw,2rem);text-transform:uppercase;margin:48px 0 14px;padding-top:24px;border-top:1px solid var(--linea)}
+.legal ul{padding:20px 24px 20px 44px;border-radius:18px;background:var(--n-900);border:1px solid var(--linea)}
+.legal li+li{margin-top:6px}
+.legal li::marker{color:var(--turbo-texto)}
+.legal .volver{margin-top:48px}
+
+/* El único movimiento nuevo: en Servicios, la raya azul de cada fila se pinta al llegar a ella, como la franja de la fachada */
+@supports (animation-timeline:view()) and (animation-range:entry 0% entry 100%){
+  @media (prefers-reduced-motion:no-preference){
+    .servicio::before{animation:pintar-raya linear both;animation-timeline:view();animation-range:entry 0% cover 35%}
+  }
+}
+@keyframes pintar-raya{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (min-width:1000px){.seccion{padding-block:136px}.intro{margin-bottom:72px}}
+/* Intros en dos columnas en escritorio, como la historia: titular a la izquierda, texto a la derecha */
+@media (min-width:1000px){
+  .seccion>.envoltura>.intro{max-width:none;grid-template-columns:1.1fr 1fr;column-gap:64px;row-gap:12px;align-items:end;align-content:end}
+  .seccion>.envoltura>.intro>*{grid-column:2}
+  .seccion>.envoltura>.intro>.ceja{grid-column:1/-1}
+  .seccion>.envoltura>.intro>h2{grid-column:1;grid-row:2/span 4;align-self:end}
+  .seccion>.envoltura>.intro>:last-child{margin-bottom:6px}
+}
+.pie-final{align-items:center}
+@media (min-width:1000px){
+  #contacto .intro{align-items:start}
+  #contacto .intro>h2{align-self:start}
+  #contacto .intro>address{margin-top:4px}
+}
+.pie.pie-corto{padding-block:28px 32px}

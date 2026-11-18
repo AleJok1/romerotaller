@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+# Cuando haya dominio: crear sitemap.xml (ver README-PUBLICAR.md) y descomentar:
+# Sitemap: https://www.EL-DOMINIO.es/sitemap.xml

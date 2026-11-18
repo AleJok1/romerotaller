@@ -1,0 +1,12 @@
+{
+  // Worker solo de assets estáticos. Sin "main": no hay script.
+  // El directorio ./ se publica en la ruta /. "404-page" sirve el 404.html
+  // más cercano con estado 404. _headers, en este mismo directorio, lo lee
+  // Workers y no se sirve como archivo.
+  "name": "romerotaller",
+  "compatibility_date": "2026-11-18",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "404-page"
+  }
+}
