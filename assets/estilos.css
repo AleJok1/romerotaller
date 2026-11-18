@@ -338,18 +338,19 @@ h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
 .ceja{display:flex;align-items:center;gap:12px;font:600 .8125rem/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gris-chapa)}
 .ceja::before{content:"";width:28px;height:2px;border-radius:2px;background:var(--turbo);flex:none}
 
-/* Portada: la nave a toda pantalla, el texto abajo a la izquierda */
-.portada{position:relative;isolation:isolate;margin-top:-73px;min-height:100vh;min-height:100svh;display:grid;align-items:end;padding:calc(73px + 40px) 0 96px;overflow:clip;background:var(--n-950)}
-.portada-media{position:absolute;inset:0;z-index:-1;overflow:hidden;transform-origin:50% 0}
-.portada-media picture,.portada-media img{width:100%;height:100%}
-.portada-media img{object-fit:cover;object-position:60% 22%}
-.portada-media::after{content:"";position:absolute;inset:0;background:
-  radial-gradient(120% 70% at 0% 100%,rgb(11 42 107/.5),transparent 62%),
-  linear-gradient(180deg,rgb(11 13 16/.5) 0%,rgb(11 13 16/.08) 18%,rgb(11 13 16/.35) 34%,rgb(11 13 16/.88) 52%,var(--n-950) 82%)}
-.portada-contenido{display:grid;justify-items:start}
+/* Portada: texto a la izquierda; la fachada ocupa la mitad derecha, a ras del borde */
+.portada{position:relative;isolation:isolate;margin-top:-73px;padding:calc(73px + 36px) 0 56px;overflow:clip;background:linear-gradient(165deg,#0b0d10 0%,#0c1836 62%,#071a40 100%)}
+.portada-contenido{display:grid;grid-template-areas:"texto" "foto" "datos";justify-items:start;align-items:center;row-gap:22px}
+.portada-texto,.portada .datos-hoy{position:relative;z-index:1}
+.portada-texto{grid-area:texto;display:grid;justify-items:start;min-width:0}
+.portada-foto{grid-area:foto;position:relative;width:calc(100% + 40px);max-width:none;height:auto;margin:4px 0 4px -20px;aspect-ratio:16/9;border-radius:0;overflow:hidden;background:#10141c}
+.portada-foto picture{position:absolute;inset:0}
+.portada-foto img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 30%}
+.portada-foto::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#0b0d10 0%,rgb(11 13 16/.45) 16%,transparent 38%)}
+.portada .datos-hoy{grid-area:datos}
 .portada .ceja{letter-spacing:0;text-transform:none;font:500 1rem/1.2 var(--sans);color:var(--t-1);padding:9px 14px;border-radius:10px;background:rgb(11 13 16/.55);border:1px solid rgb(238 241 244/.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .portada .ceja::before{display:none}
-.portada h1{font-size:clamp(2.9rem,1.1rem + 7.4vw,6.5rem);line-height:.86;letter-spacing:-.015em;text-transform:uppercase;margin:18px 0 20px;max-width:11ch;text-shadow:0 2px 40px rgb(0 0 0/.35)}
+.portada h1{font-size:clamp(2.9rem,1.1rem + 5.6vw,5.5rem);line-height:.86;letter-spacing:-.015em;text-transform:uppercase;margin:18px 0 20px;max-width:11ch}
 .portada h1 span{display:block;color:var(--turbo)}
 .portada .entrada{font-size:clamp(1.125rem,1rem + .5vw,1.375rem);line-height:1.5;color:var(--t-2);max-width:40ch;margin-bottom:26px}
 .portada .acciones .boton{min-height:54px;padding-inline:22px;font-size:1.0625rem}
@@ -365,14 +366,17 @@ h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
   .portada .datos-hoy{grid-template-columns:repeat(2,minmax(0,1fr))}
   .portada .datos-hoy li+li{border-top:0;border-left:1px solid rgb(238 241 244/.12);padding-left:24px}
 }
+@media (min-width:700px) and (max-width:999px){
+  .portada-foto{width:calc(100% + 48px);margin-left:-24px}
+}
 @media (min-width:1000px){
-  .portada{min-height:min(100svh,1000px);padding-bottom:40px}
-  .portada-media img{object-position:50% 38%}
-  .portada-media::after{background:
-    radial-gradient(90% 90% at 0% 100%,rgb(11 42 107/.55),transparent 60%),
-    linear-gradient(90deg,rgb(11 13 16/.94) 0%,rgb(11 13 16/.8) 34%,rgb(11 13 16/.3) 62%,rgb(11 13 16/.15) 100%),
-    linear-gradient(0deg,var(--n-950) 0%,rgb(11 13 16/0) 30%),
-    linear-gradient(180deg,rgb(11 13 16/.55) 0%,rgb(11 13 16/0) 22%)}
+  .portada{padding-block:calc(73px + 48px) 56px}
+  .portada-contenido{width:calc(100% - min(54vw,1200px));max-width:none;margin:0;padding-inline:clamp(28px,3.2vw,72px);box-sizing:border-box;grid-template-areas:"texto" "datos";row-gap:8px;align-content:center;min-height:520px}
+  .portada-texto,.portada .datos-hoy{width:min(100%,40rem);margin-left:auto}
+  .portada h1{max-width:100%;font-size:clamp(3.25rem,1.4rem + 3.1vw,5.15rem)}
+  .portada-foto{position:absolute;z-index:0;inset:0 0 0 auto;width:min(54vw,1200px);height:auto;margin:0;aspect-ratio:auto}
+  .portada-foto img{object-position:44% 34%}
+  .portada-foto::after{background:linear-gradient(90deg,#0b0d10 0%,rgb(11 13 16/.82) 14%,rgb(11 13 16/.28) 38%,transparent 64%)}
 }
 @media (max-width:699px){
   .portada{padding:calc(73px + 24px) 0 76px}
@@ -418,16 +422,7 @@ h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
   .historia-pie{grid-template-columns:1fr auto;align-items:center;max-width:none;gap:32px}
 }
 
-/* Movimiento v5: solo dos momentos, ligados al scroll */
-@supports (animation-timeline:scroll()) and (animation-range:0% 100%){
-  @media (prefers-reduced-motion:no-preference){
-    /* La portada se aleja: la nave se encoge un poco y se recorta como una tarjeta */
-    .portada-media{animation:alejar linear both;animation-timeline:scroll(root);animation-range:0 90vh}
-    .portada-media img{animation:enfocar linear both;animation-timeline:scroll(root);animation-range:0 90vh}
-  }
-}
-@keyframes alejar{to{scale:.9;border-radius:32px;opacity:.55}}
-@keyframes enfocar{from{scale:1.06}to{scale:1}}
+/* La foto de portada ya va en una tarjeta: el encogido al hacer scroll se quitó. */
 @supports (animation-timeline:view()) and (animation-range:entry 0% entry 100%){
   @media (prefers-reduced-motion:no-preference){
     /* Antes y después: el kart sube un poco; el Miguel de hoy se descubre de izquierda a derecha y la línea del camino se traza */
@@ -460,27 +455,32 @@ h1,h2,h3{overflow-wrap:break-word;hyphens:auto}
 .intro>p:not(.ceja){font-size:clamp(1.125rem,1rem + .4vw,1.3125rem);line-height:1.55}
 .tenue{color:var(--t-2)}
 
-/* Servicios: filas rotuladas con icono, no una rejilla de tarjetas */
+/* Servicios: la fila entera es el enlace; la raya azul se pinta al llegar */
 .servicios{grid-template-columns:minmax(0,1fr)!important;column-gap:0;border-top:0}
-.servicio{position:relative;grid-template-columns:52px minmax(0,1fr);gap:6px 20px;align-items:start;padding-block:28px;border-bottom:0;padding-inline-end:0}
+.servicio{position:relative;grid-template-columns:52px minmax(0,1fr) auto;gap:8px 16px;align-items:center;padding:28px 8px;border-bottom:0;border-radius:16px;transition:background-color .2s var(--curva)}
 .servicio::before{content:"";position:absolute;inset:0 0 auto;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--turbo-oscuro),rgb(0 108 158/.12) 70%);transform-origin:0 50%}
 .servicio:last-child{border-bottom:1px solid var(--c-linea)}
-.servicio-icono{grid-row:span 2;display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#fff;border:1px solid var(--c-linea);color:var(--turbo-oscuro);box-shadow:0 10px 24px -16px rgb(21 24 28/.45)}
+.servicio:has(a:hover),.servicio:has(a:focus-visible){background:rgb(21 24 28/.05)}
+.servicio:has(a:focus-visible){outline:3px solid var(--turbo-oscuro);outline-offset:3px}
+.servicio-icono{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#fff;border:1px solid var(--c-linea);color:var(--turbo-oscuro);box-shadow:0 10px 24px -16px rgb(21 24 28/.45)}
 .servicio-icono svg{width:26px;height:26px}
 .servicio h3{font-size:clamp(1.625rem,1.25rem + 1.1vw,2.375rem);line-height:1;text-transform:uppercase;letter-spacing:.005em}
+.servicio h3 a{color:inherit;text-decoration:none}
+.servicio h3 a::after{content:"";position:absolute;inset:0;border-radius:inherit}
+.servicio a:hover,.servicio a:focus-visible{text-decoration:none;outline:none}
 .servicio p{margin-top:10px;font-size:1.0625rem;color:var(--ct-2);max-width:52ch}
-.clara .servicio a{grid-column:2;justify-self:start;display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-top:6px;font-weight:600;color:var(--ct-1);text-decoration:none}
-.servicio a svg{width:18px;height:18px;color:var(--turbo-oscuro);transition:translate .25s var(--curva)}
-.servicio a:hover{text-decoration:underline;text-underline-offset:.3em}
-.servicio a:hover svg{translate:4px 0}
+.servicio-flecha{width:22px;height:22px;color:var(--turbo-oscuro);justify-self:end;transition:translate .25s var(--curva)}
+.servicio:has(a:hover) .servicio-flecha,.servicio:has(a:focus-visible) .servicio-flecha{translate:4px 0}
 @media (min-width:1000px){
-  .servicio{grid-template-columns:64px minmax(0,1fr) auto;align-items:center;gap:40px;padding-block:36px}
-  .servicio-icono{grid-row:auto;width:64px;height:64px;border-radius:16px}
+  .servicio{grid-template-columns:64px minmax(0,1fr) auto;gap:36px;padding:32px 16px}
+  .servicio-icono{width:64px;height:64px;border-radius:16px}
   .servicio-icono svg{width:30px;height:30px}
   .servicio-texto{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:40px;align-items:center}
   .servicio p{margin:0}
-  .clara .servicio a{grid-column:auto;margin:0;padding:10px 18px;border:1px solid rgb(21 24 28/.18);border-radius:12px;background:#fff;transition:border-color .2s var(--curva),box-shadow .2s var(--curva)}
-  .clara .servicio a:hover{text-decoration:none;border-color:var(--turbo-oscuro);box-shadow:0 10px 24px -16px rgb(0 108 158/.6)}
+}
+@media (prefers-reduced-motion:reduce){
+  .servicio-flecha{transition:none}
+  .servicio:has(a:hover) .servicio-flecha,.servicio:has(a:focus-visible) .servicio-flecha{translate:none}
 }
 
 /* Recordatorio: tarjeta azul marino de la franja de la fachada */
@@ -554,9 +554,18 @@ details.duda p{font-size:1.0625rem;padding-bottom:28px}
 #contacto .intro .boton{margin-top:8px}
 .tarjeta{padding:24px;border-radius:20px;background:var(--n-900);border:1px solid var(--linea);box-shadow:0 40px 70px -50px rgb(0 0 0/.9)}
 .tarjeta h3{font-size:1.75rem;text-transform:uppercase}
-.lista-contacto li{grid-template-columns:118px minmax(0,1fr)}
-.lista-contacto span{display:inline-flex;align-items:center;gap:10px;color:var(--t-2)}
-.lista-contacto span svg{width:18px;height:18px;flex:none;color:var(--turbo-texto)}
+.lista-contacto li{display:grid;grid-template-columns:minmax(5.75rem,1fr) minmax(0,max-content);align-items:center;column-gap:12px;min-height:52px;padding-block:6px}
+.lista-contacto li>a,.lista-contacto .contacto-valor{justify-self:end;max-width:100%;min-width:0;text-align:right}
+.lista-contacto .contacto-valor{display:inline-flex;flex-wrap:nowrap;align-items:center;color:var(--t-1)}
+.lista-contacto a{display:inline-flex;align-items:center;justify-content:flex-end;min-height:44px;min-width:0;overflow-wrap:normal}
+.lista-contacto a[href^="mailto"],.lista-contacto a[href*="instagram"]{overflow-wrap:normal;word-break:normal;text-align:right}
+.lista-contacto li:has(a[href^="mailto"]){display:flex;flex-wrap:wrap;justify-content:space-between}
+.lista-contacto li:has(a[href^="mailto"])>a{flex:1 1 auto;min-width:min-content;margin-inline-start:auto;max-width:100%}
+.lista-contacto li>span:not(.contacto-valor){display:block;min-width:0;color:var(--t-2)}
+.lista-contacto li>span:not(.contacto-valor) svg{display:inline-block;width:18px;height:18px;margin-inline-end:8px;vertical-align:-0.2em;color:var(--turbo-texto)}
+.wa-mini{flex:none;justify-content:center;width:40px;height:40px;min-width:40px;min-height:40px;margin-inline-start:8px;border-radius:10px;background:var(--wa);color:var(--wa-texto)}
+.wa-mini svg{width:18px;height:18px;color:currentColor}
+.lista-contacto a.wa-mini:hover{background:#3fe07c;text-decoration:none}
 .lista-contacto li:last-child,.horario div:last-child{border-bottom:0}
 .horario .hoy{margin-inline:-12px;padding-inline:12px;border-radius:10px;background:rgb(0 152 224/.1);border-bottom-color:transparent}
 .mapa{border-radius:24px;box-shadow:0 48px 80px -48px rgb(0 0 0/.95),0 0 0 1px var(--linea)}
