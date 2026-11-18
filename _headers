@@ -1,0 +1,16 @@
+# Cabeceras para Cloudflare Pages. No hace falta tocar nada.
+# Si algún día se activa Cloudflare Web Analytics, añadir a la CSP:
+#   script-src 'self' https://static.cloudflareinsights.com;
+#   connect-src 'self' https://cloudflareinsights.com;
+# HSTS se activa desde la zona del dominio en Cloudflare cuando lo haya.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/*
+  Cache-Control: public, max-age=604800
+/*
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; font-src 'self'; frame-src https://www.google.com; connect-src 'self'; base-uri 'self'; form-action https://wa.me https://api.whatsapp.com; frame-ancestors 'none'; object-src 'none'
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
