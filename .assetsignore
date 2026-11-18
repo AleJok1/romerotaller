@@ -1,0 +1,10 @@
+.git
+.gitignore
+.assetsignore
+wrangler.jsonc
+README.md
+README-PUBLICAR.md
+node_modules
+.DS_Store
+# Lo crea `wrangler deploy` dentro del directorio de assets. Sin esta línea se publicaría.
+.wrangler
