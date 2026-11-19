@@ -87,5 +87,5 @@ Para encontrarlos todos: buscar `PENDIENTE` en `index.html`, `aviso-legal.html` 
 - Horario de verano: resuelto. No hay; es el mismo todo el año. Sábados, domingos y festivos, cerrado.
 - Reseñas: resuelto. Las 3 reseñas de la web están copiadas literalmente de Google (confirmado).
 - Respuestas de las dudas: resuelto. Presupuesto gratis y sin compromiso, garantía de la pieza (mano de obra y montaje cubiertos por el taller), todas las marcas con especial cariño a BMW, coches eléctricos (Miguel acaba de formarse), no hacen chapa y pintura ni motos, pago en efectivo, Bizum, tarjeta o transferencia inmediata, hace falta cita, y no hay coche de sustitución (a veces acercan a casa al dejar el coche).
-- Aviso legal: el titular es un autónomo (no es una S.L.). Nombre comercial: Taller Romero. NIF: 15428943Z. Sigue pendiente el nombre completo del autónomo.
+- Aviso legal: resuelto. El titular es un autónomo (no es una S.L.): Miguel Martín Romero. Nombre comercial: Taller Romero. NIF: 15428943Z.
 - ¿Tienen página de Facebook? (sale el icono en la fachada). Si la tienen, se añade el enlace.
