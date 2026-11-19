@@ -1,5 +1,39 @@
 // Taller Romero · JS sin dependencias. Todo el horario sale de assets/config.js.
 (() => {
+  /* Barra móvil: en pantallas estrechas se esconde mientras los botones de
+     la portada siguen a la vista. La clase en <html> la pone este script;
+     si no llega a ejecutarse, la barra sigue visible y se puede usar. */
+  const barra = document.querySelector('.barra-movil');
+  const ctasPortada = document.querySelector('.portada .acciones');
+  if (barra && ctasPortada && 'IntersectionObserver' in window) {
+    const raiz = document.documentElement;
+    try {
+      const io = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          const mostrar = !entry.isIntersecting;
+          const teniaFoco = !mostrar && barra.contains(document.activeElement);
+          barra.classList.toggle('barra-visible', mostrar);
+          barra.inert = !mostrar;
+          if (teniaFoco) {
+            const main = document.getElementById('contenido');
+            if (main) main.focus({ preventScroll: true });
+          }
+        }
+      });
+      raiz.classList.add('barra-js');
+      barra.inert = true;
+      io.observe(ctasPortada);
+      // El primer estado (oculto o visible) se pinta sin transición.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => raiz.classList.add('barra-animar'));
+      });
+    } catch {
+      raiz.classList.remove('barra-js', 'barra-animar');
+      barra.classList.remove('barra-visible');
+      barra.inert = false;
+    }
+  }
+
   const C = window.TALLER;
   if (!C) return;
   const N = C.negocio;
