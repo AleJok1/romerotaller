@@ -37,8 +37,7 @@ window.TALLER = {
   /* Horario de todo el año (no hay horario de verano).
      1 = lunes … 6 = sábado, 0 = domingo.
      Cada día es una lista de tramos [abre, cierra]. Lista vacía = cerrado.
-     Laborables confirmados: 8:00–16:00. El sábado se deja como está:
-     su horario aún no está confirmado.
+     Confirmado: lunes a viernes 8:00-16:00. Sábados, domingos y festivos, cerrado.
      Si un día abren mañana y tarde: [['08:00','13:30'], ['16:00','19:00']] */
   horario: {
     1: [['08:00', '16:00']],
@@ -46,7 +45,7 @@ window.TALLER = {
     3: [['08:00', '16:00']],
     4: [['08:00', '16:00']],
     5: [['08:00', '16:00']],
-    6: [['10:00', '13:00']],
+    6: [],
     0: []
   },
 

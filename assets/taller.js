@@ -112,23 +112,28 @@
     $$('[data-horario-resumen]').forEach(el => {
       el.textContent = gs.filter(g => g.txt !== 'Cerrado').map(g => `${nombreGrupo(g.dias, true)} ${g.txt}`).join(' · ');
     });
-    // Tabla
+    // Tabla. Si el sábado también está cerrado, va en la misma fila que
+    // el domingo y los festivos: «Sábados, domingos y festivos».
     const tabla = $('#horario');
     if (tabla) {
       const filas = [];
       for (const g of gs) {
         if (g.txt === 'Cerrado' && g.dias.includes(0)) {
           const otros = g.dias.filter(d => d !== 0);
-          if (otros.length) filas.push({ txt: g.txt, dias: otros, festivos: false });
-          filas.push({ txt: 'Cerrado', dias: [0], festivos: true });
-        } else filas.push({ txt: g.txt, dias: g.dias, festivos: false });
+          if (otros.length === 1 && otros[0] === 6) {
+            filas.push({ txt: 'Cerrado', etiqueta: 'Sábados, domingos y festivos', hoy: h => h.wd === 0 || h.wd === 6 || !!h.festivo });
+          } else {
+            if (otros.length) filas.push({ txt: g.txt, dias: otros });
+            filas.push({ txt: 'Cerrado', etiqueta: 'Domingos y festivos', hoy: h => h.wd === 0 || !!h.festivo });
+          }
+        } else filas.push({ txt: g.txt, dias: g.dias });
       }
       tabla.replaceChildren(...filas.map(g => {
         const fila = document.createElement('div');
-        const esHoy = g.festivos ? (hoy.wd === 0 || !!hoy.festivo) : (g.dias.includes(hoy.wd) && !hoy.festivo);
+        const esHoy = g.hoy ? g.hoy(hoy) : (g.dias.includes(hoy.wd) && !hoy.festivo);
         if (esHoy) fila.className = 'hoy';
         const dt = document.createElement('dt');
-        dt.textContent = g.festivos ? 'Domingos y festivos' : nombreGrupo(g.dias, false);
+        dt.textContent = g.etiqueta || nombreGrupo(g.dias, false);
         const dd = document.createElement('dd'); dd.textContent = g.txt;
         fila.append(dt, dd); return fila;
       }));
@@ -136,6 +141,13 @@
     // Frase de un día concreto (p. ej. la respuesta de los sábados)
     $$('[data-horario-dia]').forEach(el => {
       const t = base[el.dataset.horarioDia] || [];
+      if (el.dataset.horarioFrase === 'sabado') {
+        const horas = t.map(([x, y]) => `de ${hora(x)} a ${hora(y)}`).join(' y ');
+        el.textContent = t.length
+          ? `Los sábados abrimos ${horas}. Los domingos y festivos el taller está cerrado.`
+          : 'No. Los sábados, los domingos y los festivos el taller está cerrado.';
+        return;
+      }
       el.textContent = t.length ? t.map(([x, y]) => `de ${hora(x)} a ${hora(y)}`).join(' y ') : 'cerrado';
     });
     // Los festivos no se listan: siguen en config.js y cierran el estado de arriba.
