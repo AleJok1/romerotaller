@@ -1,9 +1,10 @@
 /* =====================================================================
    TALLER ROMERO · CONFIGURACIÓN ÚNICA
-   Este es el ÚNICO sitio donde se cambian horario, festivos, verano,
+   Este es el ÚNICO sitio donde se cambian horario, festivos,
    reseñas y dominio. La web (estado abierto/cerrado, tabla de horario,
    respuesta de los sábados, datos para Google, contacto descargable y
    recordatorio de calendario) lo lee todo de aquí.
+   El horario es el mismo todo el año: no hay horario de verano.
    Formato de horas: "HH:MM" en hora de Madrid. Fechas: "AAAA-MM-DD".
    ===================================================================== */
 window.TALLER = {
@@ -33,7 +34,8 @@ window.TALLER = {
     dominio: null
   },
 
-  /* Horario normal de la semana, todo el año. 1 = lunes … 6 = sábado, 0 = domingo.
+  /* Horario de todo el año (no hay horario de verano).
+     1 = lunes … 6 = sábado, 0 = domingo.
      Cada día es una lista de tramos [abre, cierra]. Lista vacía = cerrado.
      Confirmado: lunes a viernes 8:00-16:00. Sábados, domingos y festivos, cerrado.
      Si un día abren mañana y tarde: [['08:00','13:30'], ['16:00','19:00']] */
@@ -45,19 +47,6 @@ window.TALLER = {
     5: [['08:00', '16:00']],
     6: [],
     0: []
-  },
-
-  /* [PENDIENTE] Horario de verano. Ahora está DESACTIVADO (activo: false).
-     Si tienen horario de verano, pon activo: true y ajusta fechas (MM-DD) y tramos.
-     El ejemplo de abajo es INVENTADO para que se vea el formato. No es su horario. */
-  verano: {
-    activo: false,
-    desde: '07-01',
-    hasta: '08-31',
-    horario: {
-      1: [['07:00', '15:00']], 2: [['07:00', '15:00']], 3: [['07:00', '15:00']],
-      4: [['07:00', '15:00']], 5: [['07:00', '15:00']], 6: [], 0: []
-    }
   },
 
   /* Festivos oficiales nacionales y de Andalucía (taller cerrado).

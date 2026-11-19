@@ -59,12 +59,10 @@
     const f = new Date(Date.UTC(y, m - 1, d + mas));
     const Y = f.getUTCFullYear(), M = f.getUTCMonth() + 1, D = f.getUTCDate(), wd = f.getUTCDay();
     const iso = `${Y}-${pad(M)}-${pad(D)}`;
-    const md = `${pad(M)}-${pad(D)}`;
-    const v = C.verano;
-    const enVerano = !!(v && v.activo && md >= v.desde && md <= v.hasta);
     const festivo = festivos.get(iso) || null;
-    const tramos = festivo ? [] : ((enVerano ? v.horario : C.horario)[wd] || []);
-    return { Y, M, D, wd, iso, festivo, tramos, enVerano };
+    // Mismo horario todo el año. Los festivos siguen dejando el día cerrado.
+    const tramos = festivo ? [] : (C.horario[wd] || []);
+    return { Y, M, D, wd, iso, festivo, tramos };
   }
   function cuando(info, offset) {
     if (offset === 0) return 'hoy';
@@ -108,7 +106,7 @@
 
   function pintarHorario() {
     const a = ahoraMadrid(), hoy = dia(a.y, a.m, a.d);
-    const base = hoy.enVerano ? C.verano.horario : C.horario;
+    const base = C.horario;
     const gs = grupos(base);
     // Resumen corto (portada)
     $$('[data-horario-resumen]').forEach(el => {
@@ -152,13 +150,6 @@
       }
       el.textContent = t.length ? t.map(([x, y]) => `de ${hora(x)} a ${hora(y)}`).join(' y ') : 'cerrado';
     });
-    // Aviso de verano
-    const v = C.verano, av = $('#aviso-verano');
-    if (av && v && v.activo) {
-      const [m1, d1] = v.desde.split('-').map(Number), [m2, d2] = v.hasta.split('-').map(Number);
-      av.hidden = false;
-      av.textContent = `Del ${d1} de ${MESES[m1 - 1]} al ${d2} de ${MESES[m2 - 1]}: ` + grupos(v.horario).filter(g => g.txt !== 'Cerrado').map(g => `${nombreGrupo(g.dias, false).toLowerCase()} ${g.txt}`).join(', ') + '.';
-    }
     // Los festivos no se listan: siguen en config.js y cierran el estado de arriba.
     // Estado
     const e = estadoAhora();
@@ -185,12 +176,13 @@
     const d = {
       '@context': 'https://schema.org', '@type': 'AutoRepair', name: N.nombre,
       telephone: N.telefonoFijo, email: N.email,
+      paymentAccepted: 'Efectivo, Bizum, tarjeta y transferencia inmediata',
       contactPoint: [{ '@type': 'ContactPoint', telephone: N.telefonoMovil, contactType: 'customer service', availableLanguage: 'es' }],
       address: { '@type': 'PostalAddress', streetAddress: N.calle, postalCode: N.cp, addressLocality: N.localidad, addressRegion: N.provincia, addressCountry: 'ES' },
       hasMap: N.mapa, sameAs: [N.instagram],
       openingHoursSpecification: spec(C.horario),
       specialOpeningHoursSpecification: especiales,
-      hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Servicios del taller', itemListElement: ['Mecánica rápida', 'Neumáticos', 'Diagnosis', 'Pre-ITV', 'Bolas de remolque', 'Aire acondicionado'].map(n => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: n } })) }
+      hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Servicios del taller', itemListElement: ['Mecánica rápida', 'Neumáticos', 'Diagnosis', 'Pre-ITV', 'Bolas de remolque', 'Aire acondicionado', 'Coches eléctricos'].map(n => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: n } })) }
     };
     if (dom) Object.assign(d, { '@id': dom + '/#taller', url: dom + '/', image: dom + '/og.jpg', logo: dom + '/apple-touch-icon.png' });
     // Sin aggregateRating a propósito: Google no admite valoraciones «autoservidas»
