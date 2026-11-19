@@ -569,6 +569,7 @@ details.duda p{font-size:1.0625rem;padding-bottom:28px}
 .lista-contacto li>span:not(.contacto-valor) svg{display:inline-block;width:18px;height:18px;margin-inline-end:8px;vertical-align:-0.2em;color:var(--turbo-texto)}
 .wa-mini{flex:none;justify-content:center;width:40px;height:40px;min-width:40px;min-height:40px;margin-inline-start:8px;border-radius:10px;background:var(--wa);color:var(--wa-texto)}
 .wa-mini svg{width:18px;height:18px;color:currentColor}
+.lista-contacto a.wa-mini{justify-content:center;width:40px;height:40px;min-width:40px;min-height:40px;padding:0}
 .lista-contacto a.wa-mini:hover{background:#3fe07c;text-decoration:none}
 .lista-contacto li:last-child,.horario div:last-child{border-bottom:0}
 .horario .hoy{margin-inline:-12px;padding-inline:12px;border-radius:10px;background:rgb(0 152 224/.1);border-bottom-color:transparent}
