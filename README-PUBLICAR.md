@@ -39,6 +39,7 @@ Mientras esté en `pages.dev` no hay `canonical` ni `sitemap.xml` a propósito: 
 
 Todo está en **`sitio/assets/config.js`**. La web lo usa para el «Abierto, cierra a las 16:00 / Cerrado, abre el lunes a las 8:00», la tabla de horario, la frase de los sábados y los datos para Google. No hay que tocar el HTML.
 
+- **Horario actual**: de lunes a viernes, de 8:00 a 16:00, todo el año. Sábados, domingos y festivos, cerrado. En `horario`, el sábado (`6`) y el domingo (`0`) van con lista vacía `[]`.
 - **Horario normal**: `horario`. `1` es lunes … `6` sábado, `0` domingo. Cada día es una lista de tramos, por ejemplo `[['08:00','13:30'], ['16:00','19:00']]` si cierran a mediodía, o `[]` si está cerrado.
 - **Horario de verano** [PENDIENTE]: `verano`. Ahora está desactivado y el horario de ejemplo es inventado. Si lo tienen, pon `activo: true`, las fechas (`'07-01'` = 1 de julio) y sus tramos.
 - **Festivos oficiales**: `festivosOficiales`. Están los nacionales y de Andalucía de 2026 y 2027, sacados del BOE y del BOJA (la fuente está citada en el propio archivo). Para 2028, cuando salga el decreto de la Junta en el BOJA (suele publicarse en primavera), añade las fechas en el mismo formato `['2028-01-01', 'Año Nuevo']`.
@@ -86,5 +87,5 @@ Para encontrarlos todos: buscar `PENDIENTE` en `index.html`, `aviso-legal.html` 
 - Festivos locales de Roquetas y si hay horario de verano.
 - Reseñas: resuelto. Las 3 reseñas de la web están copiadas literalmente de Google (confirmado).
 - Respuestas de las dudas: presupuesto antes de tocar, garantía, marcas, formas de pago, qué no hacen, si hace falta cita. Están como borrador o vacías: que las confirmen ellos.
-- Aviso legal: NIF/CIF de TALLER ROMERO S.L.
+- Aviso legal: el titular es un autónomo (no es una S.L.). Nombre comercial: Taller Romero. NIF: 15428943Z. Sigue pendiente el nombre completo del autónomo.
 - ¿Tienen página de Facebook? (sale el icono en la fachada). Si la tienen, se añade el enlace.
