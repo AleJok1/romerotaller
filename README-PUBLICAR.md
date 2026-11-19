@@ -39,8 +39,8 @@ Mientras esté en `pages.dev` no hay `canonical` ni `sitemap.xml` a propósito: 
 
 Todo está en **`sitio/assets/config.js`**. La web lo usa para el «Abierto, cierra a las 16:00 / Cerrado, abre el lunes a las 8:00», la tabla de horario, la frase de los sábados y los datos para Google. No hay que tocar el HTML.
 
-- **Horario normal**: `horario`. `1` es lunes … `6` sábado, `0` domingo. Cada día es una lista de tramos, por ejemplo `[['08:00','13:30'], ['16:00','19:00']]` si cierran a mediodía, o `[]` si está cerrado.
-- **Horario de verano** [PENDIENTE]: `verano`. Ahora está desactivado y el horario de ejemplo es inventado. Si lo tienen, pon `activo: true`, las fechas (`'07-01'` = 1 de julio) y sus tramos.
+- **Horario**: `horario`. `1` es lunes … `6` sábado, `0` domingo. Cada día es una lista de tramos, por ejemplo `[['08:00','13:30'], ['16:00','19:00']]` si cierran a mediodía, o `[]` si está cerrado.
+- **Mismo horario todo el año**: confirmado, no hay horario de verano. De lunes a viernes, de 8:00 a 16:00. El sábado se deja como está en `horario`: aún no está confirmado.
 - **Festivos oficiales**: `festivosOficiales`. Están los nacionales y de Andalucía de 2026 y 2027, sacados del BOE y del BOJA (la fuente está citada en el propio archivo). Para 2028, cuando salga el decreto de la Junta en el BOJA (suele publicarse en primavera), añade las fechas en el mismo formato `['2028-01-01', 'Año Nuevo']`.
 - **Festivos locales de Roquetas** [PENDIENTE]: `festivosLocales`. Hay un ejemplo comentado. Las fiestas locales las publica la Junta en el BOJA para cada municipio.
 - **Vacaciones o cierres puntuales**: añádelos también en `festivosLocales` con su nombre, por ejemplo `['2027-08-16', 'Vacaciones']`.
@@ -83,8 +83,9 @@ Para encontrarlos todos: buscar `PENDIENTE` en `index.html`, `aviso-legal.html` 
 - Dominio y correo del dominio.
 - Foto de Silvia. Sigue pendiente.
 - Papel de Silvia: resuelto. Lleva la oficina del taller.
-- Festivos locales de Roquetas y si hay horario de verano.
+- Festivos locales de Roquetas. Siguen pendientes.
+- Horario de verano: resuelto. No hay; es el mismo todo el año. El horario del sábado sigue sin confirmar (se deja como está).
 - Reseñas: resuelto. Las 3 reseñas de la web están copiadas literalmente de Google (confirmado).
-- Respuestas de las dudas: presupuesto antes de tocar, garantía, marcas, formas de pago, qué no hacen, si hace falta cita. Están como borrador o vacías: que las confirmen ellos.
+- Respuestas de las dudas: resuelto. Presupuesto gratis y sin compromiso, garantía de la pieza (mano de obra y montaje cubiertos por el taller), todas las marcas con especial cariño a BMW, coches eléctricos (Miguel acaba de formarse), no hacen chapa y pintura ni motos, pago en efectivo, Bizum, tarjeta o transferencia inmediata, hace falta cita, y no hay coche de sustitución (a veces acercan a casa al dejar el coche).
 - Aviso legal: NIF/CIF de TALLER ROMERO S.L.
 - ¿Tienen página de Facebook? (sale el icono en la fachada). Si la tienen, se añade el enlace.
